@@ -58,3 +58,26 @@ if (grid) {
   );
   sort.addEventListener('change', render);
 }
+
+// Product page: gallery thumbs + quantity stepper
+const mainImg = document.querySelector('[data-gallery-main]');
+document.querySelectorAll('.gallery__thumb').forEach((thumb) =>
+  thumb.addEventListener('click', () => {
+    mainImg.src = thumb.dataset.full;
+    mainImg.alt = thumb.firstElementChild.alt;
+    document.querySelectorAll('.gallery__thumb').forEach((t) => t.classList.toggle('is-active', t === thumb));
+  })
+);
+
+const qtyInput = document.querySelector('[data-qty-input]');
+const addLink = document.querySelector('[data-add]');
+if (qtyInput && addLink) {
+  const setQty = (n) => {
+    qtyInput.value = Math.min(10, Math.max(1, n || 1));
+    addLink.href = addLink.href.replace(/quantity=\d+/, `quantity=${qtyInput.value}`);
+  };
+  document.querySelectorAll('[data-qty]').forEach((btn) =>
+    btn.addEventListener('click', () => setQty(Number(qtyInput.value) + Number(btn.dataset.qty)))
+  );
+  qtyInput.addEventListener('change', () => setQty(Number(qtyInput.value)));
+}

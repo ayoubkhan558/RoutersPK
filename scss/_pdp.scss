@@ -1,0 +1,261 @@
+@use 'breakpoints' as *;
+
+// ---------- Breadcrumb on light background ----------
+.crumbs--dark {
+  color: var(--color-muted);
+  opacity: 1;
+
+  .crumbs__link:hover {
+    color: var(--color-secondary-text);
+  }
+}
+
+// ---------- Product detail (mobile: stacked) ----------
+.pdp {
+  padding-block: var(--space-md) var(--space-xl);
+
+  &__grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @include up($bp-tablet) {
+    &__grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+
+    &__info {
+      position: sticky;
+      top: calc(var(--space-xl) * 0.8);
+    }
+  }
+}
+
+.gallery {
+  display: grid;
+  gap: var(--space-xs);
+
+  &__main {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__thumbs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xs);
+  }
+
+  &__thumb {
+    aspect-ratio: 1;
+    padding: 0;
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 2px solid transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: border-color 0.3s;
+
+    &:hover {
+      border-color: var(--color-line);
+    }
+
+    &.is-active {
+      border-color: var(--color-secondary);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.info {
+  display: grid;
+  gap: var(--space-sm);
+  align-content: start;
+
+  &__brand {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-secondary-text);
+  }
+
+  &__title {
+    font-size: var(--fs-lg);
+    line-height: var(--lh-heading);
+  }
+
+  &__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-xs);
+    font: var(--fw-bold) var(--fs-lg) var(--font-heading);
+  }
+
+  &__old {
+    font: var(--fw-regular) var(--fs-base) var(--font-body);
+    color: var(--color-muted);
+  }
+
+  &__save {
+    padding: var(--space-2xs) var(--space-xs);
+    background: var(--color-sale);
+    color: #fff;
+    font: var(--fw-bold) var(--fs-sm) var(--font-body);
+    border-radius: var(--radius-sm);
+  }
+
+  &__text {
+    max-width: 52ch;
+    color: var(--color-muted);
+  }
+
+  &__stock {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-bold);
+    color: var(--color-secondary-text);
+  }
+}
+
+.features {
+  display: grid;
+  gap: var(--space-xs);
+
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-xs);
+
+    .icon {
+      margin-top: 0.25em;
+      color: var(--color-secondary-text);
+    }
+  }
+}
+
+// ---------- Buy row ----------
+.buy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding-block: var(--space-sm);
+  border-block: 1px solid var(--color-line);
+
+  &__add {
+    flex: 1 1 10rem;
+    justify-content: center;
+  }
+
+  &__wa {
+    flex: 1 1 10rem;
+    justify-content: center;
+  }
+}
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--color-line);
+  border-radius: var(--radius-pill);
+
+  &__btn {
+    width: 2.75rem;
+    aspect-ratio: 1;
+    font: var(--fw-bold) var(--fs-md) var(--font-body);
+    color: inherit;
+    background: none;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-secondary-text);
+    }
+  }
+
+  &__input {
+    width: 2.5rem;
+    text-align: center;
+    font: var(--fw-bold) var(--fs-base) var(--font-body);
+    color: inherit;
+    background: none;
+    border: 0;
+    appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      appearance: none;
+    }
+  }
+}
+
+// ---------- Details: description + specs ----------
+.details {
+  background: var(--color-surface);
+
+  &__grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @include up($bp-desktop) {
+    &__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &__text {
+    display: grid;
+    gap: var(--space-sm);
+    max-width: 52ch;
+    color: var(--color-muted);
+  }
+}
+
+.specs {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+
+  th,
+  td {
+    padding: var(--space-xs) var(--space-sm);
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  tr:last-child :is(th, td) {
+    border-bottom: 0;
+  }
+
+  th {
+    width: 40%;
+    font-weight: var(--fw-bold);
+  }
+
+  td {
+    color: var(--color-muted);
+  }
+}

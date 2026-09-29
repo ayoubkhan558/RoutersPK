@@ -1,0 +1,10 @@
+// Mobile-first: base styles are mobile, layers are added with min-width.
+$bp-mobile: 30rem;   // large phones
+$bp-tablet: 48rem;   // tablets and up
+$bp-desktop: 64rem;  // laptops and up
+
+@mixin up($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
